@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Scraper Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        button[type="button"] {
+            background-color: #ff6347;
+            margin-left: 10px;
+        }
+
+        button[type="button"]:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+  <div>
+    <form method="post" action="{% url 'web-scraper-view' %}">
+      {% csrf_token %}
+      <h1>Django Web-Scraping Application</h1>
+      
+      <label for="{{ form.domain_url.id_for_label }}">Enter your website URL:</label>
+      {{ form.domain_url }}
+      
+      <label for="{{ form.container_tag.id_for_label }}">Enter your container tag:</label>
+      {{ form.container_tag }}
+      
+      <label for="{{ form.tags.id_for_label }}">Enter your tags:</label>
+      {{ form.tags }}
+      
+      <label for="{{ form.output_filename.id_for_label }}">Enter your output filename:</label>
+      {{ form.output_filename }}
+      
+      <button type="submit">Submit</button>
+      <button type="button" onclick="clearForm()">Clear Data</button>
+    </form>
+  </div>
+
+
+  <script>
+    function clearForm() {
+      // Get all form elements and reset their values
+      var formElements = document.getElementsByTagName('input');
+      for (var i = 0; i < formElements.length; i++) {
+        var element = formElements[i];
+        if (element.type !== 'submit') {
+          element.value = '';
+        }
+      }
+    }
+  </script>
+</body>
+</html>
